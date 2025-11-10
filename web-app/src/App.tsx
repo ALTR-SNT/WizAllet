@@ -5,6 +5,7 @@ import { useAuth } from './contexts/AuthContext'
 import { useUser } from './hooks/useUser'
 import { useTransactions } from './hooks/useTransactions'
 import AddTransactionModal from './components/AddTransactionModal' 
+import { BarChart } from '@mui/x-charts/BarChart';
 
 function App() {
   const { userId, isAuthenticated} = useAuth()
@@ -48,9 +49,9 @@ function App() {
           <section>
             <p>Summary</p>
             <ul>
-              <li>Balance: ${(Number(user?.initial_balance) + summary.income - summary.expenses).toFixed(2)}</li>
-              <li>Income: ${summary.income.toFixed(2)}</li>
-              <li>Expenses: ${summary.expenses.toFixed(2)}</li>
+              <li>Balance: ₴{(Number(user?.initial_balance) + summary.income - summary.expenses).toFixed(2)}</li>
+              <li>Income: ₴{summary.income.toFixed(2)}</li>
+              <li>Expenses: ₴{summary.expenses.toFixed(2)}</li>
             </ul>  
 
 
@@ -61,7 +62,22 @@ function App() {
 
           <section>
             <p>Diagram</p> 
-            <img src="https://placehold.co/200x200" alt="Typical placeholder" />
+            <BarChart
+              width={500}
+              height={300}
+              series={[
+                {
+                  label: 'Income',
+                  data: [summary.income],
+                },
+                {
+                  label: 'Expenses',
+                  data: [summary.expenses],
+                },  
+              ]}
+              xAxis={[{ scaleType: 'band', data: [''] }]}
+              yAxis={[{ scaleType: 'linear' }]}
+            />
           </section> 
         </div>
 
