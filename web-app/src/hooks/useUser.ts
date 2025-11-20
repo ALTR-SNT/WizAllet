@@ -2,14 +2,20 @@ import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query'
 import { userAPI } from '../services/api'
 import { useAuth } from '../contexts/AuthContext'
 
-export const useUser = (userId: number, p0: { enabled: boolean }) => {
+export const useUser = (
+  userId: number | null,
+  options: { enabled?: boolean } = {}
+) => {
   const { getToken } = useAuth()
   const token = getToken()
 
   return useQuery({
     queryKey: ['user', userId],
-    queryFn: () => userAPI(token).getUser(userId),
-    enabled: !!userId,
+    queryFn: () => {
+      if (!userId) return null
+      return userAPI(token).getUser(userId)
+    },
+    enabled: !!userId && (options.enabled ?? true),
   })
 }
 

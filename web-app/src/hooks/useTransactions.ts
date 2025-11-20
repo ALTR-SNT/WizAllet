@@ -3,13 +3,19 @@ import { transactionsAPI } from '../services/api'
 import type { Transaction, CreateTransactionRequest, UpdateTransactionRequest } from '../types'
 import { useAuth } from '../contexts/AuthContext'
 
-export const useTransactions = (userId: number, p0: { enabled: boolean }) => {
+export const useTransactions = (
+  userId: number | null,
+  options: { enabled?: boolean } = {}
+) => {
   const { getToken } = useAuth()
 
   return useQuery<Transaction[]>({
     queryKey: ['transactions', userId],
-    queryFn: () => transactionsAPI(getToken()).getTransactions(userId),
-    enabled: !!userId,
+    queryFn: () => {
+      if (!userId) return []
+      return transactionsAPI(getToken()).getTransactions(userId)
+    },
+    enabled: !!userId && (options.enabled ?? true),
   })
 }
 
