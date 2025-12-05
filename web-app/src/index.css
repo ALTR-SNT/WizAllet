@@ -56,7 +56,6 @@ h1, h2, h3 {
 
 h1 {
     font-size: 2.5em;
-    background: linear-gradient(135deg, #108a0e 0%, #ffc300 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
