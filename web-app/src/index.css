@@ -43,7 +43,7 @@ section {
 }
 
 span {
-    background: -webkit-linear-gradient(#eee, #10690d);
+    background: -webkit-linear-gradient(#d2d2cd, #222121);
     background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -56,7 +56,7 @@ h1, h2, h3 {
 
 h1 {
     font-size: 2.5em;
-    background: linear-gradient(135deg, #d2d2cd 0%, #222121 100%);
+    background: linear-gradient(135deg, #787816 0%, #0c752f 100%);
     background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
